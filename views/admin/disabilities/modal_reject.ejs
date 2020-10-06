@@ -1,0 +1,23 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="reject-disabilitas">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tolak ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/admin/disabilitas?_method=PUT" method="POST">
+                <div class="modal-body col-md-12">
+                    <p>Anda yakin ingin menolak pengajuan ini?</p>
+                    <label for="reason">Keterangan</label>
+                    <textarea class="form-control" name="reason" id="reason" cols="30" rows="10"></textarea>
+                </div>
+                <input name="id" type="hidden" class="id">
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="submit" class="btn btn-danger">Ya</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

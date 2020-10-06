@@ -1,0 +1,80 @@
+<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" id="add-lansia">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Data Lansia</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/user/lansia" method="POST">
+                <div class="modal-body container">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="name">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="masukkan nama">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="nik">NIK</label>
+                            <input type="number" class="form-control" id="nik" name="nik" placeholder="masukkan NIK">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <Tempat for="placeOfBirth">Tempat Lahir</label>
+                                <input type="text" class="form-control" name="placeOfBirth" id="placeOfBirth"
+                                    placeholder="masukkan tempat kelahiran">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="dateOfbirth">Tanggal Lahir</label>
+                            <input type="date" class="form-control" onchange="calculateAge()" id="dateOfbirth"
+                                name="dateOfbirth">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="address">Alamat Tinggal</label>
+                            <textarea class="form-control" name="address" id="address" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="age">Umur</label>
+                            <input type="number" disabled class="form-control" id="age" name="age">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="village">Desa</label>
+                            <select id="village" class="form-control" name="villageId">
+                                <option>...Pilih Desa...</option>
+                                <% for(let i= 0; i < villages.length; i++){ %>
+                                <option value="<%= villages[i].id %>"><%= villages[i].name %></option>
+                                <% } %>
+                            </select>
+                        </div>
+                        <!-- <div class="form-group col-md-6">
+                            <label for="subdistrict">Kecamatan</label>
+                            <select id="subdistrict" class="form-control" name="subdistrict">
+                                <option>...Pilih Kecamatan...</option>
+                                <% for(let i= 0; i < subDistricts.length; i++){ %>
+                                <option value="<%= subDistricts[i].id %>"><%= subDistricts[i].name %></option>
+                                <% } %>
+                            </select>
+                        </div> -->
+                    </div>
+                    <!-- <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <input type="file" class="custom-file-input" id="picture">
+                            <label class="custom-file-label" for="validatedCustomFile">Pilih gambar</label>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="modal-footer bg-whitesmoke ">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Yes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+
+</script>

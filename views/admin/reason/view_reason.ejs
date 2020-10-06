@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../../partials/header.ejs') %>
+
+<body>
+  <div id="app">
+    <div class="main-wrapper">
+      <%- include('../../partials/navbar.ejs') %>
+      <%- include('../../partials/sidebar.ejs')%>
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="section-header">
+            <h1>Halaman Data Penyebab Disabilitas</h1>
+            <div class="section-header-breadcrumb">
+              <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+              <div class="breadcrumb-item"><a href="#">Components</a></div>
+              <div class="breadcrumb-item">Table</div>
+            </div>
+          </div>
+
+          <%- include('table_reason.ejs') %>
+        </section>
+      </div>
+      <%- include('../../partials/footer.ejs') %>
+    </div>
+  </div>
+  <%- include('../../partials/js.ejs') %>
+  <!-- Modal -->
+  <%- include('modal_delete.ejs') %>
+  <%- include('modal_edit.ejs') %>
+  <%- include('modal_add.ejs') %>
+</body>
+
+<script>
+  $('#table-reason').on('click', '.button-edit', function () {
+    let id = $(this).data('id');
+    let name = $(this).data('name');
+    $('#edit-reason').modal('show');
+    $('.id').val(id);
+    $('.name').val(name);
+
+  });
+  $('#table-reason').on('click', '.button-delete', function () {
+    let id = $(this).data('id');
+    $('#delete-reason').modal('show');
+    $('.id').val(id);
+  });
+</script>
+
+</html>

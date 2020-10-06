@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../../partials/header.ejs') %>
+
+<body>
+  <div id="app">
+    <div class="main-wrapper">
+      <%- include('../../partials/navbar.ejs') %>
+      <%- include('../../partials/sidebar.ejs')%>
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="section-header">
+            <h1>Halaman Data Lansia</h1>
+            <div class="section-header-breadcrumb">
+              <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+              <div class="breadcrumb-item"><a href="#">Components</a></div>
+              <div class="breadcrumb-item">Table</div>
+            </div>
+          </div>
+
+          <%- include('table_lansia.ejs')%>
+        </section>
+      </div>
+      <%- include('../../partials/footer.ejs') %>
+    </div>
+  </div>
+  <%- include('../../partials/js.ejs') %>
+  <!-- Modal -->
+  <%- include('modal_detail.ejs') %>
+  <%- include('modal_reject.ejs') %>
+</body>
+
+<script>
+  $('#table-lansia').on('click', '.button-reject', function () {
+    let id = $(this).data('id');
+    $('#reject-lansia').modal('show');
+    $('.id').val(id);
+
+  })
+</script>
+
+</html>

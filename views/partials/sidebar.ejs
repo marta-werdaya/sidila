@@ -1,0 +1,64 @@
+<div class="main-sidebar">
+    <aside id="sidebar-wrapper">
+        <div class="sidebar-brand">
+            <a href="/">sidila</a>
+        </div>
+        <div class="sidebar-brand sidebar-brand-sm">
+            <a href="/">sd</a>
+        </div>
+        <% if(user=="admin"){ %>
+        <ul class="sidebar-menu">
+            <li class="menu-header">Dashboard</li>
+            <li>
+                <a class="nav-link" href="/admin/dashboard"><i class="fas fa-fire"></i><span>Home</span></a>
+            </li>
+            <li class="menu-header">Menu Utama</li>
+            <li>
+                <a class="nav-link" href="/admin/lansia"><i class="fas fa-table"></i><span>Data Lansia</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-table"></i>
+                    <span>Disabilitas</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="/admin/disabilitas">Data Disabilitas</a></li>
+                    <li><a class="nav-link" href="/admin/disability-type">Tipe Disabilitas</a></li>
+                    <li><a class="nav-link" href="/admin/reason">Penyebab Disabilitas</a></li>
+                </ul>
+            </li>
+            <li class="menu-header">Others</li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-map-marker-alt"></i> <span>Data
+                        Wilayah</span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/admin/village">Data Desa</a></li>
+                    <li><a href="/admin/subdistrict">Data Kecamatan</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="nav-link" href="/admin/jenisbantuan"><i class="fas fa-th-large"></i><span>Jenis
+                        Bantuan</span></a>
+            </li>
+        </ul>
+        <!-- <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+            <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
+                <i class="fas fa-rocket"></i> Pelaporan
+            </a>
+        </div> -->
+        <% }else{ %>
+        <ul class="sidebar-menu">
+            <li class="menu-header">Dashboard</li>
+            <li>
+                <a class="nav-link" href="/user/dashboard"><i class="fas fa-fire"></i><span>Home</span></a>
+            </li>
+            <li class="menu-header">Menu</li>
+            <li>
+                <a class="nav-link" href="/user/lansia"><i class="fas fa-th-large"></i><span>Data Lansia</span></a>
+            </li>
+            <li>
+                <a class="nav-link" href="/user/disabilitas"><i class="fas fa-th-large"></i><span>Data
+                        Disabilitas</span></a>
+            </li>
+        </ul>
+        <% } %>
+    </aside>
+</div>

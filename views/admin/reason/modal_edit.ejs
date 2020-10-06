@@ -1,0 +1,25 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="edit-reason">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/admin/reason?_method=PUT" method="POST">
+                <div class="modal-body">
+                    <div class="form-group col-md-12">
+                        <label for="name">Nama Disabilitas</label>
+                        <input type="text" class="form-control name" id="name" name="name"
+                            placeholder="masukkan nama disabilitas">
+                    </div>
+                </div>
+                <input type="hidden" name="id" class="id">
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

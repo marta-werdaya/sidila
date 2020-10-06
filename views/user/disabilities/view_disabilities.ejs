@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../../partials/header.ejs') %>
+
+<body>
+  <div id="app">
+    <div class="main-wrapper">
+      <%- include('../../partials/navbar.ejs') %>
+      <%- include('../../partials/sidebar.ejs')%>
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="section-header">
+            <h1>Halaman Data Disabilitas</h1>
+            <div class="section-header-breadcrumb">
+              <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+              <div class="breadcrumb-item"><a href="#">Components</a></div>
+              <div class="breadcrumb-item">Table</div>
+            </div>
+          </div>
+
+          <%- include('table_disabilities.ejs') %>
+        </section>
+      </div>
+      <%- include('../../partials/footer.ejs') %>
+    </div>
+  </div>
+  <%- include('../../partials/js.ejs') %>
+  <!-- Modal -->
+  <%- include('modal_delete.ejs') %>
+  <%- include('modal_add.ejs') %>
+  <%- include('modal_edit.ejs') %>
+</body>
+
+<script>
+  $('#table-disabilitas').on('click', '.button-update', function () {
+    let id = $(this).data('id');
+    let nik = $(this).data('nik');
+    let name = $(this).data('name');
+    let place = $(this).data('place');
+    let dateOfBirth = $(this).data('dateOfBirth');
+    let address = $(this).data('address');
+    let age = $(this).data('age');
+    let district = $(this).data('district');
+    //
+    let village = $(this).data('village');
+    let education = $(this).data('education');
+    let parent = $(this).data('parent');
+    let type = $(this).data('type');
+    let reason = $(this).data('reason');
+    let proposal = $(this).data('proposal');
+    //ID section
+    let village_id = $(this).data('village_id');
+    let education_id = $(this).data('education_id');
+    let type_id = $(this).data('type_id');
+    let reason_id = $(this).data('reason_id');
+    let proposal_id = $(this).data('proposal_id');
+    $('#edit-disabilitas').modal('show');
+    $('.id').val(id);
+    $('.nik').val(nik);
+    $('.name').val(name);
+    $('.place').val(place);
+    $('.dateOfBirth').val(dateOfBirth);
+    $('.address').val(address);
+    $('.age').val(age);
+    $('.proposal').val(proposal);
+    $('.parent').val(parent);
+    let selectedVillage = document.getElementById("selectVillage");
+    let selectEducation = document.getElementById("selectEducation");
+    let selectDisabilityType = document.getElementById("selectDisabilityType");
+    let selectReason = document.getElementById("selectReason");
+    selectedVillage.text = village;
+    selectEducation.text = education;
+    selectDisabilityType.text = type;
+    selectReason.text = reason;
+    //ID
+    selectedVillage.value = village_id;
+    selectEducation.value = education_id;
+    selectDisabilityType.value = type_id;
+    selectReason.value = reason_id;
+  });
+  $('#table-disabilitas').on('click', '.button-delete', function () {
+    let id = $(this).data('id');
+    $('#delete-disabilitas').modal('show');
+    $('.id').val(id);
+
+  });
+
+</script>
+
+</html>
