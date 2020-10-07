@@ -1,4 +1,4 @@
 {
     "jwtPrivateKey": "",
-    "db": "mongodb://localhost/system_dinsos"
+    "db": "mongodb+srv://sidila:rahasia@cluster0.7rw6l.mongodb.net/sidila?retryWrites=true&w=majority"
 }

@@ -12,46 +12,56 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="name">Nama Lengkap</label>
-                            <input type="text" class="form-control lansia name" id="name" name="name">
+                            <input type="text" class="form-control name" onfocusout="validateName()" id="name"
+                                name="name">
+                            <span class="valid-feedback"></span>
                         </div>
                         <div class="form-group col-md-5">
                             <label for="nik">NIK</label>
-                            <input type="number" class="form-control nik" id="nik" name="nik">
+                            <input type="number" class="form-control nik" id="nik" name="nik"
+                                onfocusout="validateNIK()">
+                            <span class="invalid-feedback"></span>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <Tempat for="placeOfBirth">Tempat Lahir</label>
-                                <input type="text" class="form-control place" name="placeOfBirth" id="placeOfBirth">
+                                <input type="text" class="form-control place" name="placeOfBirth" id="placeOfBirth"
+                                    onfocusout="validatePlace()">
+                                <span class="invalid-feedback"></span>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="dateOfbirth">Tanggal Lahir</label>
-                            <input onchange="calculateAge()" type="date" class="form-control dateOfbirth"
-                                id="dateOfbirth" name="dateOfBirth">
+                            <input onchange="calculateAge('edit-age','edit-dateOfbirth')" type="date"
+                                class="form-control dateOfbirth" onfocusout="validateDate()" id="edit-dateOfbirth"
+                                name="dateOfBirth">
+                            <span class="invalid-feedback"></span>
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="address">Alamat Tinggal</label>
-                            <textarea class="form-control address" name="address" id="address" cols="30"
-                                rows="10"></textarea>
+                            <textarea class="form-control address" name="address" onfocusout="validateAddress()"
+                                id="address" cols="30" rows="10"></textarea>
+                            <span class="invalid-feedback"></span>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-2">
-                            <label for="edit-age">Umur</label>
-                            <input type="number" disabled class="form-control age" id="age" name="age">
+                            <label for="age">Umur</label>
+                            <input type="number" disabled class="form-control age" id="edit-age" name="age">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="villageId">Desa</label>
-                            <select id="villageId" class="form-control" name="villageId">
+                            <select id="villageId" class="form-control" name="villageId" onfocusout="validateVillage()">
                                 <option id="selectVillage" selected="true" value="selectVillage">...Pilih Desa...
                                 </option>
                                 <% for(let i= 0; i < villages.length; i++){ %>
                                 <option value="<%= villages[i].id %>"><%= villages[i].name %></option>
                                 <% } %>
                             </select>
+                            <span class="invalid-feedback"></span>
                         </div>
-                        <div class="form-group col-md-6">
+                        <!-- <div class="form-group col-md-6">
                             <label for="subdistrictId">Kecamatan</label>
                             <select id="subdistrictId" class="form-control" name="subdistrictId">
                                 <option id="selectSubDistrict" selected>...Pilih Kecamatan...</option>
@@ -59,7 +69,7 @@
                                 <option value="<%= subDistricts[i].id %>"><%= subDistricts[i].name %></option>
                                 <% } %>
                             </select>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- <div class="form-row">
                         <div class="form-group col-md-4">

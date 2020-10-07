@@ -15,7 +15,7 @@ module.exports = function (app) {
         secret: 'keyboard cat',
         resave: false,
         saveUninitialized: true,
-        cookie: { maxAge: 6000000 }
+        cookie: { maxAge: 60000000 }
     }));
     app.use('/assets', express.static(path.join(__dirname, '../assets')));
     app.use('/node_modules', express.static(path.join(__dirname, '../node_modules')));

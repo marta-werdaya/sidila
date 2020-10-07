@@ -7,48 +7,59 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/user/lansia" method="POST">
+            <form action="/user/lansia" method="POST" id="myForm">
                 <div class="modal-body container">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="name">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="masukkan nama">
+                            <input type="text" class="form-control" onfocusout="validateName()" id="name" name="name"
+                                placeholder="masukkan nama">
+                            <span class="invalid-feedback"></span>
+
                         </div>
                         <div class="form-group col-md-5">
                             <label for="nik">NIK</label>
-                            <input type="number" class="form-control" id="nik" name="nik" placeholder="masukkan NIK">
+                            <input type="number" class="form-control" onfocusout="validateNIK()" id="nik" name="nik"
+                                placeholder="masukkan NIK">
+                            <span class="invalid-feedback"></span>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <Tempat for="placeOfBirth">Tempat Lahir</label>
                                 <input type="text" class="form-control" name="placeOfBirth" id="placeOfBirth"
-                                    placeholder="masukkan tempat kelahiran">
+                                    placeholder="masukkan tempat kelahiran" onfocusout="validatePlace()">
+                                <span class="invalid-feedback"></span>
+
                         </div>
                         <div class="form-group col-md-2">
                             <label for="dateOfbirth">Tanggal Lahir</label>
-                            <input type="date" class="form-control" onchange="calculateAge()" id="dateOfbirth"
-                                name="dateOfbirth">
+                            <input type="date" class="form-control" onchange="calculateAge('age','dateOfbirth')"
+                                id="dateOfbirth" onfocusout="validateDate()" name="dateOfbirth">
+                            <span class="invalid-feedback"></span>
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="address">Alamat Tinggal</label>
-                            <textarea class="form-control" name="address" id="address" cols="30" rows="10"></textarea>
+                            <textarea class="form-control" name="address" onfocusout="validateAddress()" id="address"
+                                cols="30" rows="10"></textarea>
+                            <span class="invalid-feedback"></span>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="age">Umur</label>
-                            <input type="number" disabled class="form-control" id="age" name="age">
+                            <input type="number" disabled class="form-control age" id="age" name="age">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="village">Desa</label>
-                            <select id="village" class="form-control" name="villageId">
+                            <select id="village" class="form-control" name="villageId" onfocusout="validateVillage()">
                                 <option>...Pilih Desa...</option>
                                 <% for(let i= 0; i < villages.length; i++){ %>
                                 <option value="<%= villages[i].id %>"><%= villages[i].name %></option>
                                 <% } %>
                             </select>
+                            <span class="invalid-feedback"></span>
                         </div>
                         <!-- <div class="form-group col-md-6">
                             <label for="subdistrict">Kecamatan</label>

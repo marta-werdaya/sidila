@@ -76,6 +76,7 @@ module.exports = {
     },
     editLansia: async (req, res) => {
         const { id } = req.body;
+        console.log(req.body);
         const lansia = await Lansia.findOneAndUpdate({ _id: id, }, { $set: req.body }, { new: true });
         const person = await Person.findOneAndUpdate({ _id: lansia.personId }, { $set: req.body }, { new: true });
 

@@ -12,92 +12,99 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="nik">NIK</label>
-                            <input type="number" class="form-control" id="nik" placeholder="masukan NIK" name="nik">
+                            <input type="number" class="form-control" onfocusout="validateNIK()" id="nik"
+                                placeholder="masukan NIK" name="nik">
+                            <span class="invalid-feedback"></span>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="name" placeholder="masukan nama anda"
-                                name="name">
+                            <input type="text" class="form-control" id="name" onfocusout="validateName()"
+                                placeholder="masukan nama anda" name="name">
+                            <span class="invalid-feedback"></span>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="placeOfBirth">Tempat Lahir</label>
                             <input type="text" class="form-control" id="placeOfBirth"
-                                placeholder="masukkan tempat lahir anda" name="placeOfBirth">
+                                placeholder="masukkan tempat lahir anda" name="placeOfBirth"
+                                onfocusout="validatePlace()">
+                            <span class="invalid-feedback"></span>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="dateOfBirth">Tanggal Lahir</label>
-                            <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth">
+                            <input type="date" class="form-control" id="dateOfbirth" name="dateOfBirth"
+                                onfocusout="validateDate()">
+                            <span class="invalid-feedback"></span>
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="inputZip">Alamat Tinggal</label>
-                            <textarea class="form-control" name="address" id="" cols="30" rows="10"></textarea>
+                            <textarea class="form-control" name="address" onfocusout="validateAddress()" id="address"
+                                cols="30" rows="10"></textarea>
+                            <span class="invalid-feedback"></span>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="villageId">Desa</label>
-                            <select id="villageId" class="form-control" name="villageId">
+                            <label for="village">Desa</label>
+                            <select id="village" class="form-control" name="villageId" onfocusout="validateVillage()">
                                 <option>...Pilih Desa...</option>
                                 <% for(let i= 0; i < villages.length; i++){ %>
                                 <option value="<%= villages[i].id %>"><%= villages[i].name %></option>
                                 <% } %>
                             </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="subdistrictId">Kecamatan</label>
-                            <select id="subdistrictId" class="form-control" name="subdistrictId">
-                                <option>...Pilih Kecamatan...</option>
-                                <% for(let i= 0; i < subDistricts.length; i++){ %>
-                                <option value="<%= subDistricts[i].id %>"><%= subDistricts[i].name %></option>
-                                <% } %>
-                            </select>
+                            <span class="invalid-feedback"></span>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="educationId">Pendidikan Tekrakhir</label>
-                            <select id="educationId" class="form-control" name="educationId">
+                            <label for="education">Pendidikan Tekrakhir</label>
+                            <select id="education" class="form-control" name="educationId"
+                                onfocusout="validateEducation()">
                                 <option selected>Pilih jenjang pendidikan...</option>
                                 <% for(let i = 0; i < educations.length; i++ ){ %>
                                 <option value="<%= educations[i].id%>"><%= educations[i].name%></option>
                                 <% } %>
                             </select>
+                            <span class="invalid-feedback"></span>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="parent">Nama Orang Tua</label>
                             <input type="text" class="form-control" id="parent" placeholder="masukkan nama oang tua"
-                                name="parent">
+                                name="parent" onfocusout="validateParent()">
+                            <span class="invalid-feedback"></span>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="disabilityTypeId">Jenis Disabilitas</label>
-                            <select id="disabilityTypeId" class="form-control" name="disabilityTypeId">
+                            <label for="disabilityType">Jenis Disabilitas</label>
+                            <select id="disabilityType" class="form-control" name="disabilityTypeId"
+                                onfocusout="validateType()">
                                 <option selected>Pilih Jenis Disabilitas...</option>
                                 <% for(let i = 0; i < disabilityTypes.length; i++ ){ %>
                                 <option value="<%= disabilityTypes[i].id%>"><%= disabilityTypes[i].name%></option>
                                 <% } %>
+                                <span class="invalid-feedback"></span>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="reasonId"> Penyebab Disabilitas</label>
-                            <select id="reasonId" class="form-control" name="reasonId">
+                            <label for="reason"> Penyebab Disabilitas</label>
+                            <select id="reason" class="form-control" name="reasonId" onfocusout="validateReason()">
                                 <option selected>...Pilih Penyebab Disabilitas...</option>
                                 <% for(let i = 0; i < reasons.length; i++) {%>
                                 <option value="<%= reasons[i].id %>"><%= reasons[i].name%></option>
                                 <% } %>
-
+                                <span class="invalid-feedback"></span>
                             </select>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="proposal">Bantuan yang Diusulkan</label>
-                            <textarea class="form-control" id="proposal" cols="30" rows="10"
-                                name="proposalName"></textarea>
+                            <textarea class="form-control" id="proposal" onfocusout="validateProposal()" cols="30"
+                                rows="10" name="proposalName"></textarea>
+                            <span class="invalid-feedback"></span>
                         </div>
                     </div>
                     <!-- <div class="form-row">

@@ -87,6 +87,90 @@
 
   });
 
+  //VALIDATION
+  const name = document.getElementById('name');
+  const nik = document.getElementById('nik');
+  const placeOfBirth = document.getElementById('placeOfBirth');
+  const dateOfbirth = document.getElementById('dateOfbirth');
+  const address = document.getElementById('address');
+  const village = document.getElementById('village');
+  const education = document.getElementById('education');
+  const parent = document.getElementById('parent');
+  const disabilityType = document.getElementById('disabilityType');
+  const reason = document.getElementById('reason');
+  const proposal = document.getElementById('proposal');
+
+  function validateName() {
+    if (checkIfEmpty(name)) return;
+  }
+  function validateNIK() {
+    if (checkIfEmpty(nik)) return;
+    if (nik.value.length < 16) {
+      setInvalid(nik, "NIK kurang dari 16 digit");
+    }
+    if (nik.value.length > 16) {
+      setInvalid(nik, "NIK lebih dari 16 digit");
+    }
+    return true;
+  }
+  function validatePlace() {
+    if (checkIfEmpty(placeOfBirth)) return;
+  }
+  function validateDate() {
+    if (checkIfEmpty(dateOfbirth)) return;
+  }
+  function validateAddress() {
+    if (checkIfEmpty(address)) return;
+  }
+
+  function validateVillage() {
+    if (checkIfEmpty(village)) return;
+  }
+  function validateEducation() {
+    if (checkIfEmpty(education)) return;
+  }
+  function validateParent() {
+    if (checkIfEmpty(parent)) return;
+  }
+  function validateType() {
+    if (checkIfEmpty(disabilityType)) return;
+  }
+  function validateReason() {
+    if (checkIfEmpty(reason)) return;
+  }
+  function validateProposal() {
+    if (checkIfEmpty(proposal)) return;
+  }
+
+
+  // Validation colors
+  const green = '#4CAF50';
+  const red = '#F44336';
+  function checkIfEmpty(field) {
+    if (isEmpty(field.value.trim())) {
+      // set field invalid
+      setInvalid(field, `Kolom ini tidak boleh kosong`);
+      return true;
+    } else {
+      // set field valid
+      setValid(field);
+      return false;
+    }
+  }
+  function isEmpty(value) {
+    if (value === '') return true;
+    return false;
+  }
+  function setInvalid(field, message) {
+    field.className = 'form-control is-invalid';
+    field.nextElementSibling.innerHTML = message;
+    field.nextElementSibling.style.color = red;
+  }
+  function setValid(field) {
+    field.className = 'form-control is-valid';
+    field.nextElementSibling.innerHTML = '';
+    field.nextElementSibling.style.color = green;
+  }
 </script>
 
 </html>
