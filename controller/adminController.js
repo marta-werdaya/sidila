@@ -17,10 +17,16 @@ module.exports = {
             res.redirect('/index/login');
         } else if (req.session.user.permissionId == "admin") {
             const username = req.session.user;
+            const disabilities = await Disability.find()
+                .populate({ path: 'personId', populate: { path: 'proposalId' } });
+            const lansias = await Lansia.find()
+                .populate({ path: 'personId', populate: { path: 'proposalId' } });
             res.render('admin/dashboard/index', {
                 title: 'Dashboard',
                 user: 'admin',
-                username
+                username,
+                disabilities,
+                lansias,
             });
         } else {
             res.redirect('/user/dashboard');

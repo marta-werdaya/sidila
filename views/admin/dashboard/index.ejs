@@ -18,7 +18,7 @@
               <div class="card card-statistic-2">
                 <div class="card-stats">
                   <div class="card-stats-title">Statistic Disabilitas -
-                    <div class="dropdown d-inline">
+                    <!-- <div class="dropdown d-inline">
                       <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#"
                         id="orders-month">August</a>
                       <ul class="dropdown-menu dropdown-menu-sm">
@@ -36,19 +36,37 @@
                         <li><a href="#" class="dropdown-item">November</a></li>
                         <li><a href="#" class="dropdown-item">December</a></li>
                       </ul>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="card-stats-items">
                     <div class="card-stats-item">
-                      <div class="card-stats-item-count">24</div>
-                      <div class="card-stats-item-label">Terdaftar</div>
+                      <%if(disabilities){%>
+                      <% let count = 0;%>
+                      <% for (i = 0; i < disabilities.length; i++) { %>
+                      <% (disabilities[i].personId.proposalId.status == "Ditolak") ? count++ : count;%>
+                      <% }%>
+                      <div class="card-stats-item-count"><%= count %></div>
+                      <% }%>
+                      <div class="card-stats-item-label">Ditolak</div>
                     </div>
                     <div class="card-stats-item">
-                      <div class="card-stats-item-count">12</div>
+                      <%if(disabilities){%>
+                      <% let count = 0;%>
+                      <% for (i = 0; i < disabilities.length; i++) { %>
+                      <% (disabilities[i].personId.proposalId.status == "Menunggu Konfirmasi") ? count++ : count;%>
+                      <% }%>
+                      <div class="card-stats-item-count"><%= count %></div>
+                      <% }%>
                       <div class="card-stats-item-label">Menunggu</div>
                     </div>
                     <div class="card-stats-item">
-                      <div class="card-stats-item-count">23</div>
+                      <%if(disabilities){%>
+                      <% let count = 0;%>
+                      <% for (i = 0; i < disabilities.length; i++) { %>
+                      <% (disabilities[i].personId.proposalId.status == "Diterima") ? count++ : count;%>
+                      <% }%>
+                      <div class="card-stats-item-count"><%= count %></div>
+                      <% }%>
                       <div class="card-stats-item-label">Diterima</div>
                     </div>
                   </div>
@@ -61,7 +79,7 @@
                     <h4>Total Data Disabilitas</h4>
                   </div>
                   <div class="card-body">
-                    59
+                    <%= disabilities.length%>
                   </div>
                 </div>
               </div>
@@ -70,7 +88,7 @@
               <div class="card card-statistic-2">
                 <div class="card-stats">
                   <div class="card-stats-title">Statistik Lansia -
-                    <div class="dropdown d-inline">
+                    <!-- <div class="dropdown d-inline">
                       <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#"
                         id="orders-month">August</a>
                       <ul class="dropdown-menu dropdown-menu-sm">
@@ -88,19 +106,37 @@
                         <li><a href="#" class="dropdown-item">November</a></li>
                         <li><a href="#" class="dropdown-item">December</a></li>
                       </ul>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="card-stats-items">
                     <div class="card-stats-item">
-                      <div class="card-stats-item-count">24</div>
-                      <div class="card-stats-item-label">Terdaftar</div>
+                      <%if(lansias){%>
+                      <% let count = 0;%>
+                      <% for (i = 0; i < lansias.length; i++) { %>
+                      <% (lansias[i].personId.proposalId.status == "Ditolak") ? count++ : count;%>
+                      <% }%>
+                      <div class="card-stats-item-count"><%= count %></div>
+                      <% }%>
+                      <div class="card-stats-item-label">Ditolak</div>
                     </div>
                     <div class="card-stats-item">
-                      <div class="card-stats-item-count">12</div>
+                      <%if(lansias){%>
+                      <% let count = 0;%>
+                      <% for (i = 0; i < lansias.length; i++) { %>
+                      <% (lansias[i].personId.proposalId.status == "Menunggu Konfirmasi") ? count++ : count;%>
+                      <% }%>
+                      <div class="card-stats-item-count"><%= count %></div>
+                      <% }%>
                       <div class="card-stats-item-label">Menunggu</div>
                     </div>
                     <div class="card-stats-item">
-                      <div class="card-stats-item-count">23</div>
+                      <%if(lansias){%>
+                      <% let count = 0;%>
+                      <% for (i = 0; i < lansias.length; i++) { %>
+                      <% (lansias[i].personId.proposalId.status == "Diterima") ? count++ : count;%>
+                      <% }%>
+                      <div class="card-stats-item-count"><%= count %></div>
+                      <% }%>
                       <div class="card-stats-item-label">Diterima</div>
                     </div>
                   </div>
@@ -113,7 +149,7 @@
                     <h4>Total Data Lansia</h4>
                   </div>
                   <div class="card-body">
-                    59
+                    <%= lansias.length%>
                   </div>
                 </div>
               </div>

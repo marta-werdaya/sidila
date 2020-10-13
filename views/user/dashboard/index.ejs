@@ -4,122 +4,158 @@
 <%- include('../../partials/header.ejs') %>
 
 <body>
-    <div id="app">
-        <div class="main-wrapper">
-            <%- include('../../partials/navbar.ejs') %>
-            <%- include('../../partials/sidebar.ejs')%>
+  <div id="app">
+    <div class="main-wrapper">
+      <%- include('../../partials/navbar.ejs') %>
+      <%- include('../../partials/sidebar.ejs')%>
 
-            <!-- Main Content -->
-            <div class="main-content">
-                <section class="section">
-                    <!-- Data Statistic -->
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="card card-statistic-2">
-                                <div class="card-stats">
-                                    <div class="card-stats-title">Statistic Disabilitas -
-                                        <div class="dropdown d-inline">
-                                            <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#"
-                                                id="orders-month">August</a>
-                                            <ul class="dropdown-menu dropdown-menu-sm">
-                                                <li class="dropdown-title">Select Month</li>
-                                                <li><a href="#" class="dropdown-item">January</a></li>
-                                                <li><a href="#" class="dropdown-item">February</a></li>
-                                                <li><a href="#" class="dropdown-item">March</a></li>
-                                                <li><a href="#" class="dropdown-item">April</a></li>
-                                                <li><a href="#" class="dropdown-item">May</a></li>
-                                                <li><a href="#" class="dropdown-item">June</a></li>
-                                                <li><a href="#" class="dropdown-item">July</a></li>
-                                                <li><a href="#" class="dropdown-item active">August</a></li>
-                                                <li><a href="#" class="dropdown-item">September</a></li>
-                                                <li><a href="#" class="dropdown-item">October</a></li>
-                                                <li><a href="#" class="dropdown-item">November</a></li>
-                                                <li><a href="#" class="dropdown-item">December</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="card-stats-items">
-                                        <div class="card-stats-item">
-                                            <div class="card-stats-item-count">24</div>
-                                            <div class="card-stats-item-label">Terdaftar</div>
-                                        </div>
-                                        <div class="card-stats-item">
-                                            <div class="card-stats-item-count">12</div>
-                                            <div class="card-stats-item-label">Menunggu</div>
-                                        </div>
-                                        <div class="card-stats-item">
-                                            <div class="card-stats-item-count">23</div>
-                                            <div class="card-stats-item-label">Diterima</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-icon shadow-primary bg-primary">
-                                    <i class="fas fa-archive"></i>
-                                </div>
-                                <div class="card-wrap">
-                                    <div class="card-header">
-                                        <h4>Total Data Disabilitas</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        59
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="card card-statistic-2">
-                                <div class="card-stats">
-                                    <div class="card-stats-title">Statistik Lansia -
-                                        <div class="dropdown d-inline">
-                                            <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#"
-                                                id="orders-month">August</a>
-                                            <ul class="dropdown-menu dropdown-menu-sm">
-                                                <li class="dropdown-title">Select Month</li>
-                                                <li><a href="#" class="dropdown-item">January</a></li>
-                                                <li><a href="#" class="dropdown-item">February</a></li>
-                                                <li><a href="#" class="dropdown-item">March</a></li>
-                                                <li><a href="#" class="dropdown-item">April</a></li>
-                                                <li><a href="#" class="dropdown-item">May</a></li>
-                                                <li><a href="#" class="dropdown-item">June</a></li>
-                                                <li><a href="#" class="dropdown-item">July</a></li>
-                                                <li><a href="#" class="dropdown-item active">August</a></li>
-                                                <li><a href="#" class="dropdown-item">September</a></li>
-                                                <li><a href="#" class="dropdown-item">October</a></li>
-                                                <li><a href="#" class="dropdown-item">November</a></li>
-                                                <li><a href="#" class="dropdown-item">December</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="card-stats-items">
-                                        <div class="card-stats-item">
-                                            <div class="card-stats-item-count">24</div>
-                                            <div class="card-stats-item-label">Terdaftar</div>
-                                        </div>
-                                        <div class="card-stats-item">
-                                            <div class="card-stats-item-count">12</div>
-                                            <div class="card-stats-item-label">Menunggu</div>
-                                        </div>
-                                        <div class="card-stats-item">
-                                            <div class="card-stats-item-count">23</div>
-                                            <div class="card-stats-item-label">Diterima</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-icon shadow-primary bg-primary">
-                                    <i class="fas fa-archive"></i>
-                                </div>
-                                <div class="card-wrap">
-                                    <div class="card-header">
-                                        <h4>Total Data Lansia</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        59
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <!-- Data Statistic -->
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="card card-statistic-2">
+                <div class="card-stats">
+                  <div class="card-stats-title">Statistic Disabilitas -
+                    <!-- <div class="dropdown d-inline">
+                      <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#"
+                        id="orders-month">August</a>
+                      <ul class="dropdown-menu dropdown-menu-sm">
+                        <li class="dropdown-title">Select Month</li>
+                        <li><a href="#" class="dropdown-item">January</a></li>
+                        <li><a href="#" class="dropdown-item">February</a></li>
+                        <li><a href="#" class="dropdown-item">March</a></li>
+                        <li><a href="#" class="dropdown-item">April</a></li>
+                        <li><a href="#" class="dropdown-item">May</a></li>
+                        <li><a href="#" class="dropdown-item">June</a></li>
+                        <li><a href="#" class="dropdown-item">July</a></li>
+                        <li><a href="#" class="dropdown-item active">August</a></li>
+                        <li><a href="#" class="dropdown-item">September</a></li>
+                        <li><a href="#" class="dropdown-item">October</a></li>
+                        <li><a href="#" class="dropdown-item">November</a></li>
+                        <li><a href="#" class="dropdown-item">December</a></li>
+                      </ul>
+                    </div> -->
+                  </div>
+                  <div class="card-stats-items">
+                    <div class="card-stats-item">
+                      <%if(disabilities){%>
+                      <% let count = 0;%>
+                      <% for (i = 0; i < disabilities.length; i++) { %>
+                      <% (disabilities[i].personId.proposalId.status == "Ditolak") ? count++ : count;%>
+                      <% }%>
+                      <div class="card-stats-item-count"><%= count %></div>
+                      <% }%>
+                      <div class="card-stats-item-label">Ditolak</div>
                     </div>
-                    <!-- <div class="row">
+                    <div class="card-stats-item">
+                      <%if(disabilities){%>
+                      <% let count = 0;%>
+                      <% for (i = 0; i < disabilities.length; i++) { %>
+                      <% (disabilities[i].personId.proposalId.status == "Menunggu Konfirmasi") ? count++ : count;%>
+                      <% }%>
+                      <div class="card-stats-item-count"><%= count %></div>
+                      <% }%>
+                      <div class="card-stats-item-label">Menunggu</div>
+                    </div>
+                    <div class="card-stats-item">
+                      <%if(disabilities){%>
+                      <% let count = 0;%>
+                      <% for (i = 0; i < disabilities.length; i++) { %>
+                      <% (disabilities[i].personId.proposalId.status == "Diterima") ? count++ : count;%>
+                      <% }%>
+                      <div class="card-stats-item-count"><%= count %></div>
+                      <% }%>
+                      <div class="card-stats-item-label">Diterima</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-icon shadow-primary bg-primary">
+                  <i class="fas fa-archive"></i>
+                </div>
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <h4>Total Data Disabilitas</h4>
+                  </div>
+                  <div class="card-body">
+                    <%= disabilities.length%>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="card card-statistic-2">
+                <div class="card-stats">
+                  <div class="card-stats-title">Statistik Lansia -
+                    <!-- <div class="dropdown d-inline">
+                      <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#"
+                        id="orders-month">August</a>
+                      <ul class="dropdown-menu dropdown-menu-sm">
+                        <li class="dropdown-title">Select Month</li>
+                        <li><a href="#" class="dropdown-item">January</a></li>
+                        <li><a href="#" class="dropdown-item">February</a></li>
+                        <li><a href="#" class="dropdown-item">March</a></li>
+                        <li><a href="#" class="dropdown-item">April</a></li>
+                        <li><a href="#" class="dropdown-item">May</a></li>
+                        <li><a href="#" class="dropdown-item">June</a></li>
+                        <li><a href="#" class="dropdown-item">July</a></li>
+                        <li><a href="#" class="dropdown-item active">August</a></li>
+                        <li><a href="#" class="dropdown-item">September</a></li>
+                        <li><a href="#" class="dropdown-item">October</a></li>
+                        <li><a href="#" class="dropdown-item">November</a></li>
+                        <li><a href="#" class="dropdown-item">December</a></li>
+                      </ul>
+                    </div> -->
+                  </div>
+                  <div class="card-stats-items">
+                    <div class="card-stats-item">
+                      <%if(lansias){%>
+                      <% let count = 0;%>
+                      <% for (i = 0; i < lansias.length; i++) { %>
+                      <% (lansias[i].personId.proposalId.status == "Ditolak") ? count++ : count;%>
+                      <% }%>
+                      <div class="card-stats-item-count"><%= count %></div>
+                      <% }%>
+                      <div class="card-stats-item-label">Ditolak</div>
+                    </div>
+                    <div class="card-stats-item">
+                      <%if(lansias){%>
+                      <% let count = 0;%>
+                      <% for (i = 0; i < lansias.length; i++) { %>
+                      <% (lansias[i].personId.proposalId.status == "Menunggu Konfirmasi") ? count++ : count;%>
+                      <% }%>
+                      <div class="card-stats-item-count"><%= count %></div>
+                      <% }%>
+                      <div class="card-stats-item-label">Menunggu</div>
+                    </div>
+                    <div class="card-stats-item">
+                      <%if(lansias){%>
+                      <% let count = 0;%>
+                      <% for (i = 0; i < lansias.length; i++) { %>
+                      <% (lansias[i].personId.proposalId.status == "Diterima") ? count++ : count;%>
+                      <% }%>
+                      <div class="card-stats-item-count"><%= count %></div>
+                      <% }%>
+                      <div class="card-stats-item-label">Diterima</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-icon shadow-primary bg-primary">
+                  <i class="fas fa-archive"></i>
+                </div>
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <h4>Total Data Lansia</h4>
+                  </div>
+                  <div class="card-body">
+                    <%= lansias.length%>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="row">
             <div class="col-lg-8">
               <div class="card">
                 <div class="card-header">
@@ -267,12 +303,12 @@
               </div>
             </div>
           </div> -->
-                </section>
-            </div>
-            <%- include('../../partials/footer.ejs') %>
-        </div>
+        </section>
+      </div>
+      <%- include('../../partials/footer.ejs') %>
     </div>
-    <%- include('../../partials/js.ejs') %>
+  </div>
+  <%- include('../../partials/js.ejs') %>
 </body>
 
 </html>
