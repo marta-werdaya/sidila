@@ -5,6 +5,7 @@ const user = require('../routes/user');
 var path = require('path');
 const methodOverride = require('method-override');
 const session = require('express-session');
+const { jsPDF } = require("jspdf");
 
 
 module.exports = function (app) {
@@ -15,7 +16,7 @@ module.exports = function (app) {
         secret: 'keyboard cat',
         resave: false,
         saveUninitialized: true,
-        cookie: { maxAge: 60000000 }
+        // cookie: { maxAge: 60000000 }
     }));
     app.use('/assets', express.static(path.join(__dirname, '../assets')));
     app.use('/node_modules', express.static(path.join(__dirname, '../node_modules')));

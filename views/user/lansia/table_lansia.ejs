@@ -24,24 +24,29 @@
                             <th>No</th>
                             <th>Nama</th>
                             <th>NIK</th>
+                            <th>Tgl Lahir</th>
                             <th>Desa</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
                         <% for(let i = 0 ; i < lansias.length; i++) { %>
+                            <% if(lansias[i].personId.enrollmentId.userId == username.id){%>
                         <tr>
                             <td><%= i + 1%></td>
                             <td><%= lansias[i].personId.name %></td>
                             <td><%= lansias[i].personId.nik %></td>
+                            <td><%= lansias[i].personId.dateOfBirth %></td>
                             <td><%= lansias[i].personId.villageId.name %></td>
                             <td>
-                                <%if(lansias[i].personId.proposalId.status == "Diterima"){%>
-                                <div class="badge badge-success">Diterima</div>
-                                <%}else if(lansias[i].personId.proposalId.status == "Ditolak"){%>
-                                <div class="badge badge-danger">Ditolak</div>
-                                <% }else{ %>
-                                <div class="badge badge-warning">Menunggu Konfirmasi</div>
-                                <%}%>
+                                <%if( lansias[i].personId.proposalId.status == "Diterima"){%>
+                                    <div class="badge badge-success">Diterima</div>
+                                    <%}else if(lansias[i].personId.proposalId.status == "Ditolak"){%>
+                                    <div class="badge badge-danger">Ditolak</div>
+                                    <% }else if(lansias[i].personId.proposalId.status == "Bantuan Diterima"){ %>
+                                    <div class="badge badge-success">Bantuan Diterima</div>
+                                    <% }else{ %>
+                                    <div class="badge badge-warning">Menunggu Konfirmasi</div>
+                                    <%}%>
                             </td>
                             <td>
                                 <div class="dropdown">
@@ -69,6 +74,7 @@
             </div>
             </td>
             </tr>
+            <% } %>
             <% } %>
             </table>
         </div>

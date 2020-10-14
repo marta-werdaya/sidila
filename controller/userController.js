@@ -8,6 +8,7 @@ const { Parent } = require('../models/parent');
 const { Education } = require('../models/education');
 const { Reason } = require('../models/reason');
 const { DisabilityType } = require('../models/disabilityType');
+const { Enrollment } = require('../models/enrollment');
 
 
 
@@ -41,7 +42,8 @@ module.exports = {
             const subDistricts = await SubDistrict.find();
             const lansias = await Lansia.find()
                 .populate({ path: 'personId', populate: { path: 'villageId', populate: { path: 'subDistrictId' } } })
-                .populate({ path: 'personId', populate: { path: 'proposalId' } });
+                .populate({ path: 'personId', populate: { path: 'proposalId' } })
+                .populate({ path: 'personId', populate: { path: 'enrollmentId' } });
             // console.log(lansias[0].personId.villageId.subDistrictId.id);
             res.render('user/lansia/view_lansia', {
                 title: 'LANSIA',
@@ -59,6 +61,7 @@ module.exports = {
     },
     addLansia: async (req, res) => {
         try {
+            const username = req.session.user;
             const { name, nik, placeOfBirth, dateOfbirth, address, age, villageId, } = req.body;
             const person = await Person.create({
                 name: name,
@@ -68,10 +71,12 @@ module.exports = {
                 address: address,
                 villageId: villageId,
             });
+            const enrollment = await Enrollment.create({ userId: username.id, personId: person._id });
             const proposal = await Proposal.create({ name: 'Pengajuan Lansia', personId: person._id });
             const lansia = await Lansia.create({ personId: person._id, age: age });
             person.lansiaId = lansia._id;
             person.proposalId = proposal._id;
+            person.enrollmentId = enrollment._id;
             await person.save();
             res.redirect('/user/lansia');
         } catch (e) {
@@ -94,10 +99,10 @@ module.exports = {
     },
     deleteLansia: async (req, res) => {
         const { id } = req.body;
-        console.log(id);
         const lansia = await Lansia.findOne({ _id: id });
         const person = await Person.findOne({ _id: lansia.personId });
         await Proposal.findByIdAndDelete({ _id: person.proposalId });
+        await Enrollment.findByIdAndDelete({ _id: person.enrollmentId });
         await lansia.remove();
         await person.remove();
         res.redirect('/user/lansia');
@@ -117,6 +122,7 @@ module.exports = {
                 .populate({ path: 'reasonId' })
                 .populate({ path: 'disabilityTypeId' })
                 .populate({ path: 'personId', populate: { path: 'villageId' } })
+                .populate({ path: 'personId', populate: { path: 'enrollmentId' } })
                 .populate({ path: 'personId', populate: { path: 'proposalId' } });
 
             res.render('user/disabilities/view_disabilities', {
@@ -137,6 +143,7 @@ module.exports = {
     },
     addDisabilitas: async (req, res) => {
         try {
+            const username = req.session.user;
             const { name, nik, placeOfBirth, dateOfBirth, address, villageId, educationId, parent, disabilityTypeId, reasonId, proposalName } = req.body;
             const person = await Person.create({
                 name: name,
@@ -160,8 +167,10 @@ module.exports = {
                 name: parent,
                 personId: person._id
             });
+            const enrollment = await Enrollment.create({ userId: username.id, personId: person._id });
             person.proposalId = proposal._id;
             person.disabilityId = disabilitas._id;
+            person.enrollmentId = enrollment._id;
             disabilitas.parentId = parentName._id;
             await disabilitas.save();
             await person.save();
@@ -189,6 +198,7 @@ module.exports = {
         const parent = await Parent.findOne({ _id: disability.parentId });
         const person = await Person.findOne({ _id: disability.personId });
         await Proposal.findByIdAndDelete({ _id: person.proposalId });
+        await Enrollment.findByIdAndDelete({ _id: person.enrollmentId });
         await parent.remove();
         await person.remove();
         await disability.remove();

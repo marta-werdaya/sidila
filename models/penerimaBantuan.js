@@ -7,6 +7,13 @@ const penerimaBantuanSchema = mongoose.Schema({
         type: ObjectId,
         ref: 'Proposal'
     },
+    penerima: {
+        type: String,
+    },
+    jenisBantuan: {
+        type: ObjectId,
+        ref: 'JenisBantuan'
+    },
     receiptDate: {
         type: Date,
         default: Date.now,

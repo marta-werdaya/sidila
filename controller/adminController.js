@@ -9,6 +9,7 @@ const { Education } = require('../models/education');
 const { Reason } = require('../models/reason');
 const { DisabilityType } = require('../models/disabilityType');
 const { JenisBantuan } = require('../models/jenisBantuan');
+const { PenerimaBantuan } = require('../models/penerimaBantuan');
 
 module.exports = {
     //BAGIAN LANSIA
@@ -31,11 +32,11 @@ module.exports = {
         } else {
             res.redirect('/user/dashboard');
         }
-
     },
     //BAGIAN LANSIA
     viewLansia: async (req, res) => {
         const username = req.session.user;
+        const jenisBantuan = await JenisBantuan.find();
         const lansias = await Lansia.find()
             .populate({ path: 'personId', populate: { path: 'villageId' } })
             .populate({ path: 'personId', populate: { path: 'proposalId' } });
@@ -43,7 +44,8 @@ module.exports = {
             title: 'LANSIA',
             user: 'admin',
             lansias,
-            username
+            username,
+            jenisBantuan,
         });
     },
     validasiLansia: async (req, res) => {
@@ -64,9 +66,18 @@ module.exports = {
         await proposal.save();
         res.redirect('/admin/lansia');
     },
+    giveLansia: async (req, res) => {
+        const { id, penerima, jenisBantuan } = req.body;
+        const proposal = await Proposal.findOne({ _id: id });
+        proposal.status = "Bantuan Diterima";
+        await proposal.save();
+        const bantuan = await PenerimaBantuan.create({ proposalId: id, penerima: penerima, jenisBantuan: jenisBantuan });
+        res.redirect('/admin/lansia');
+    },
     //BAGIAN DISABILITAS
     viewDisabilitas: async (req, res) => {
         const username = req.session.user;
+        const jenisBantuan = await JenisBantuan.find();
         const disabilities = await Disability.find()
             .populate({ path: 'parentId' })
             .populate({ path: 'educationId' })
@@ -79,6 +90,7 @@ module.exports = {
             user: 'admin',
             disabilities,
             username,
+            jenisBantuan,
         });
     },
     validasiDisabilitas: async (req, res) => {
@@ -97,6 +109,20 @@ module.exports = {
         proposal.reason = (reason == null || reason == undefined) ? keterangan : reason;
         await proposal.save();
         res.redirect('/admin/disabilitas');
+    },
+    giveDisability: async (req, res) => {
+        try {
+            const { id, penerima, jenisBantuan } = req.body;
+            const proposal = await Proposal.findOne({ _id: id });
+            proposal.status = "Bantuan Diterima";
+            await proposal.save();
+            const bantuan = await PenerimaBantuan.create({ proposalId: id, penerima: penerima, jenisBantuan: jenisBantuan });
+            res.redirect('/admin/disabilitas');
+        } catch (e) {
+            console.log(e);
+            res.redirect('/admin/disabilitas');
+
+        }
     },
     //BAGIAN TIPE DISABILITAS
     viewDisabilityType: async (req, res) => {
@@ -229,14 +255,15 @@ module.exports = {
         });
     },
     addBantuan: async (req, res) => {
-        const { name } = req.body;
-        await JenisBantuan.create({ name: name });
+        const { name, pemberi } = req.body;
+        await JenisBantuan.create({ name: name, pemberi: pemberi });
         res.redirect('/admin/jenisbantuan')
     },
     editBantuan: async (req, res) => {
-        const { id, name } = req.body;
+        const { id, name, pemberi } = req.body;
         const jenisbantuan = await JenisBantuan.findOne({ _id: id });
         jenisbantuan.name = name;
+        jenisbantuan.pemberi = pemberi;
         jenisbantuan.save();
         res.redirect('/admin/jenisbantuan')
     },
@@ -244,5 +271,28 @@ module.exports = {
         const { id } = req.body;
         const jenisbantuan = await JenisBantuan.findOneAndDelete({ _id: id });
         res.redirect('/admin/jenisbantuan')
+    },
+    //BAGIAN BANTUAN
+    viewBantuanDisabilitas: async (req, res) => {
+        const username = req.session.user;
+        const penerimas = await PenerimaBantuan.find()
+            .populate({ path: 'proposalId', populate: { path: 'personId' } });
+        res.render('admin/bantuanDisabilitas/view_penerima', {
+            title: 'Disabilitas',
+            user: 'admin',
+            penerimas,
+            username,
+        });
+    },
+    viewBantuanLansia: async (req, res) => {
+        const username = req.session.user;
+        const penerimas = await PenerimaBantuan.find()
+            .populate({ path: 'proposalId', populate: { path: 'personId' } });
+        res.render('admin/bantuanLansia/view_penerima', {
+            title: 'Disabilitas',
+            user: 'admin',
+            penerimas,
+            username,
+        });
     },
 }

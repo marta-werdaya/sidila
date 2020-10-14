@@ -4,9 +4,9 @@
     <div class="card">
       <div class="card-header">
         <h4>
-          <a href="#" data-toggle="modal" data-target="#add-data">
+          <!-- <a href="#" data-toggle="modal" data-target="#add-data">
             <button class=" btn btn-primary">Tambah Data</button>
-          </a>
+          </a> -->
         </h4>
         <div class="card-header-form">
           <form>
@@ -24,31 +24,40 @@
           <table class="table table-striped table-bordered" id="table-data">
             <tr>
               <th>No</th>
-              <th>Jenis Bantuan</th>
-              <th>Pemberi Bantuan</th>
-              <th>Action</th>
+              <th>nama</th>
+              <th>tanggal pengajuan</th>
+              <th>tanggal penerimaan</th>
+              <th>Jenis Pengajuan</th>
+              <th>penerima</th>
             </tr>
-            <% for(i = 0; i < jenisBantuans.length; i++) {%>
+            <% for(i = 0; i < penerimas.length; i++) {%>
+              <% if(penerimas[i].proposalId.name == "Pengajuan Lansia"){ %>
+                <% const datediterima = penerimas[i].receiptDate.toISOString().split('T')[0]%>
+                <% const datepengajuan = penerimas[i].proposalId.dateApply.toISOString().split('T')[0]%>
             <tr>
               <td><%= i + 1 %></td>
-              <td><%= jenisBantuans[i].name %></td>
-              <td><%= jenisBantuans[i].pemberi %></td>
+              <td><%= penerimas[i].proposalId.personId.name%></td>
+              <td><%= datepengajuan %></td>
+              <td><%= datediterima %></td>
+              <td><%= penerimas[i].proposalId.name%></td>
+              <td><%= penerimas[i].penerima%></td>
               <td>
-                <div class="dropdown">
+                <!-- <div class="dropdown">
                   <a href="#" data-toggle="dropdown" class="btn btn-outline-info dropdown-toggle">Pilihan</a>
                   <div class="dropdown-menu">
                     <a href="javascript:void()" class="dropdown-item has-icon button-edit"
-                      data-id="<%= jenisBantuans[i].id %>" data-name="<%= jenisBantuans[i].name %>" data-pemberi="<%= jenisBantuans[i].pemberi %>"><i
+                      data-id="<%= penerimas[i].id %>" data-name="<%= penerimas[i].name %>"><i
                         class="fas fa-edit"></i>
                       Edit</a>
                     <div class="dropdown-divider"></div>
                     <a href="javascript:void()" class="dropdown-item has-icon text-danger button-delete"
-                      data-id="<%= jenisBantuans[i].id %>"><i class="fas fa-trash-alt"></i>
+                      data-id="<%= penerimas[i].id %>"><i class="fas fa-trash-alt"></i>
                       Hapus</a>
                   </div>
-                </div>
+                </div> -->
               </td>
             </tr>
+            <% } %>
             <% } %>
           </table>
         </div>

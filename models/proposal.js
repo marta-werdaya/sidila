@@ -7,7 +7,6 @@ const proposalSchema = mongoose.Schema({
         type: String,
         minlength: 5,
         maxlength: 1024,
-        required: true,
     },
     personId: {
         type: ObjectId,
@@ -27,7 +26,6 @@ const proposalSchema = mongoose.Schema({
     penerimaBantuanId: {
         type: ObjectId,
         ref: 'PenerimaBantuan',
-        default: null
     },
     reason: {
         type: String,
@@ -40,7 +38,7 @@ const Proposal = mongoose.model("Proposal", proposalSchema);
 
 function validateProposal(proposal) {
     const schema = {
-        name: Joi.string().min(5).max(1024).required(),
+        // name: Joi.string().min(5).max(1024).required(),
     }
     return Joi.validate(proposal, schema);
 }

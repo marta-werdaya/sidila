@@ -25,12 +25,14 @@
             <tr>
               <th>No</th>
               <th>Desa/Kelurahan</th>
+              <th>Kecamatan</th>
               <th>Action</th>
             </tr>
             <% for(i = 0; i < villages.length; i++) {%>
             <tr>
               <td><%= i + 1 %></td>
               <td><%= villages[i].name%></td>
+              <td><%= villages[i].subDistrictId.name%></td>
               <td>
                 <div class="dropdown">
                   <a href="#" data-toggle="dropdown" class="btn btn-outline-info dropdown-toggle">Pilihan</a>

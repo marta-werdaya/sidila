@@ -8,10 +8,12 @@ router.get('/dashboard', adminController.viewDashboard);
 router.get('/lansia', adminController.viewLansia);
 router.put('/lansia', adminController.rejectLansia);
 router.put('/lansia/:id', adminController.validasiLansia);
+router.put('/bantulansia', adminController.giveLansia);
 //
 router.get('/disabilitas', adminController.viewDisabilitas);
 router.put('/disabilitas', adminController.rejectDisabilitas);
 router.put('/disabilitas/:id', adminController.validasiDisabilitas);
+router.put('/bantudisabilitas', adminController.giveDisability);
 //
 router.get('/disability-type', adminController.viewDisabilityType);
 router.post('/disability-type', adminController.addDisabilityType);
@@ -37,4 +39,7 @@ router.get('/jenisbantuan', adminController.viewBantuan);
 router.post('/jenisbantuan', adminController.addBantuan);
 router.put('/jenisbantuan', adminController.editBantuan);
 router.delete('/jenisbantuan', adminController.deleteBantuan);
+//
+router.get('/bantuan-disabilitas', adminController.viewBantuanDisabilitas);
+router.get('/bantuan-lansia', adminController.viewBantuanLansia);
 module.exports = router;

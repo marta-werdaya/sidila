@@ -6,6 +6,9 @@ const jenisBantuanSchema = mongoose.Schema({
     name: {
         type: String,
     },
+    pemberi: {
+        type: String,
+    }
 });
 
 const JenisBantuan = mongoose.model("JenisBantuan", jenisBantuanSchema);

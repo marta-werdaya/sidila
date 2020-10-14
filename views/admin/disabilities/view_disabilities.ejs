@@ -30,6 +30,7 @@
   <!-- Modal -->
   <%- include('modal_detail.ejs') %>
   <%- include('modal_reject.ejs') %>
+  <%- include('modal_penyerahan_bantuan.ejs') %>
 </body>
 
 <script>
@@ -38,7 +39,13 @@
     $('#reject-disabilitas').modal('show');
     $('.id').val(id);
 
-  })
+  });
+  $('#table-lansia').on('click', '.button-penyerahan', function () {
+    let id = $(this).data('serahid');
+    $('#bantuan-diserahkan').modal('show');
+    $('.id').val(id);
+
+  });
 </script>
 
 </html>

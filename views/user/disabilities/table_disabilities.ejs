@@ -32,6 +32,7 @@
                             <th>Action</th>
                         </tr>
                         <% for(let i = 0; i < disabilities.length; i++) {%>
+                            <% if(disabilities[i].personId.enrollmentId.userId == username.id){%>
                         <tr>
                             <td><%= i+1 %></td>
                             <td><%= disabilities[i].personId.name %></td>
@@ -40,12 +41,14 @@
                             <td><%= disabilities[i].personId.villageId.name %></td>
                             <td>
                                 <%if( disabilities[i].personId.proposalId.status == "Diterima"){%>
-                                <div class="badge badge-success">Diterima</div>
-                                <%}else if(disabilities[i].personId.proposalId.status == "Ditolak"){%>
-                                <div class="badge badge-danger">Ditolak</div>
-                                <% }else{ %>
-                                <div class="badge badge-warning">Menunggu Konfirmasi</div>
-                                <%}%>
+                                    <div class="badge badge-success">Diterima</div>
+                                    <%}else if(disabilities[i].personId.proposalId.status == "Ditolak"){%>
+                                    <div class="badge badge-danger">Ditolak</div>
+                                    <% }else if(disabilities[i].personId.proposalId.status == "Bantuan Diterima"){ %>
+                                    <div class="badge badge-success">Bantuan Diterima</div>
+                                    <% }else{ %>
+                                    <div class="badge badge-warning">Menunggu Konfirmasi</div>
+                                    <%}%>
                             </td>
                             <td>
                                 <div class="dropdown">
@@ -79,6 +82,7 @@
             </div>
             </td>
             </tr>
+            <% } %>
             <% } %>
             </table>
         </div>

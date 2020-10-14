@@ -23,7 +23,7 @@
                             <th>Nama</th>
                             <th>NIK</th>
                             <th>Desa</th>
-                            <th>Umur</th>
+                            <th>tanggal lahir</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -33,17 +33,20 @@
                             <td><%= lansias[i].personId.name %></td>
                             <td><%= lansias[i].personId.nik %></td>
                             <td><%= lansias[i].personId.villageId.name %></td>
-                            <td><%= lansias[i].age %></td>
+                            <td><%= lansias[i].personId.dateOfBirth %></td>
                             <td>
-                                <%if(lansias[i].personId.proposalId.status == "Diterima"){%>
-                                <div class="badge badge-success"><%= lansias[i].personId.proposalId.status %></div>
-                                <%}else if(lansias[i].personId.proposalId.status == "Ditolak"){%>
-                                <div class="badge badge-danger"><%= lansias[i].personId.proposalId.status %></div>
-                                <% }else{ %>
-                                <div class="badge badge-warning"><%= lansias[i].personId.proposalId.status %></div>
-                                <%}%>
+                                <%if( lansias[i].personId.proposalId.status == "Diterima"){%>
+                                    <div class="badge badge-success">Diterima</div>
+                                    <%}else if(lansias[i].personId.proposalId.status == "Ditolak"){%>
+                                    <div class="badge badge-danger">Ditolak</div>
+                                    <% }else if(lansias[i].personId.proposalId.status == "Bantuan Diterima"){ %>
+                                    <div class="badge badge-success">Bantuan Diterima</div>
+                                    <% }else{ %>
+                                    <div class="badge badge-warning">Menunggu Konfirmasi</div>
+                                    <%}%>
                             </td>
                             <td>
+                                <%if(lansias[i].personId.proposalId.status == "Diterima"){%>
                                 <form action="/admin/lansia/<%= lansias[i].personId.proposalId.id%>?_method=PUT"
                                 method="POST">
                                 <div class="dropdown">
@@ -52,17 +55,35 @@
                                     <div class="dropdown-menu">
                                         <a href="#" class="dropdown-item has-icon" data-toggle="modal"
                                             data-target="#detail-lansia"><i class="fas fa-eye"></i> Detail</a>
-                                        <button href="#" type="submit" class="dropdown-item has-icon"><i
-                                                class="fas fa-check"></i>
-                                            Validasi</button>
                                         <div class="dropdown-divider"></div>
                                         <a href="javascript:void()"
-                                            class="dropdown-item has-icon text-danger button-reject"
-                                            data-id="<%= lansias[i].personId.proposalId.id%>"><i
-                                                class="fas fa-trash-alt"></i>Tolak</a>
+                                            class="dropdown-item has-icon button-penyerahan"
+                                            data-serahid="<%= lansias[i].personId.proposalId.id%>"><i
+                                                class="fas fa-check"></i>Diserahkan</a>
                                     </div>
                                 </div>
                                 </form>
+                                <% }else{%>
+                                    <form action="/admin/lansia/<%= lansias[i].personId.proposalId.id%>?_method=PUT"
+                                        method="POST">
+                                        <div class="dropdown">
+                                            <a href="#" data-toggle="dropdown"
+                                                class="btn btn-outline-info dropdown-toggle">Pilihan</a>
+                                            <div class="dropdown-menu">
+                                                <a href="#" class="dropdown-item has-icon" data-toggle="modal"
+                                                    data-target="#detail-lansia"><i class="fas fa-eye"></i> Detail</a>
+                                                <button href="#" type="submit" class="dropdown-item has-icon"><i
+                                                        class="fas fa-check"></i>
+                                                    Validasi</button>
+                                                <div class="dropdown-divider"></div>
+                                                <a href="javascript:void()"
+                                                    class="dropdown-item has-icon text-danger button-reject"
+                                                    data-id="<%= lansias[i].personId.proposalId.id%>"><i
+                                                        class="fas fa-trash-alt"></i>Tolak</a>
+                                            </div>
+                                        </div>
+                                        </form>
+                                <% } %>
                             </td>
                         </tr>
                         <% } %>
