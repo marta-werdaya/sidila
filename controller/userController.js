@@ -15,22 +15,27 @@ const { Enrollment } = require('../models/enrollment');
 module.exports = {
     //BAGIAN LANSIA
     viewDashboard: async (req, res) => {
-        if (req.session.user == null || req.session.user == undefined) {
-            res.redirect('/index/login');
-        } else if (req.session.user.permissionId == "user") {
-            const username = req.session.user;
-            const disabilities = await Disability.find()
-                .populate({ path: 'personId', populate: { path: 'proposalId' } });
-            const lansias = await Lansia.find()
-                .populate({ path: 'personId', populate: { path: 'proposalId' } });
-            res.render('user/dashboard/index', {
-                title: 'Dashboard',
-                user: 'user',
-                username,
-                disabilities,
-                lansias,
-            });
-        } else {
+        try {
+            if (req.session.user == null || req.session.user == undefined) {
+                res.redirect('/index/login');
+            } else if (req.session.user.permissionId == "user") {
+                const username = req.session.user;
+                const disabilities = await Disability.find()
+                    .populate({ path: 'personId', populate: { path: 'proposalId' } });
+                const lansias = await Lansia.find()
+                    .populate({ path: 'personId', populate: { path: 'proposalId' } });
+                res.render('user/dashboard/index', {
+                    title: 'Dashboard',
+                    user: 'user',
+                    username,
+                    disabilities,
+                    lansias,
+                });
+            } else {
+                res.redirect('/admin/dashboard');
+            }
+
+        } catch (e) {
             res.redirect('/admin/dashboard');
         }
 
@@ -44,10 +49,13 @@ module.exports = {
                 .populate({ path: 'personId', populate: { path: 'villageId', populate: { path: 'subDistrictId' } } })
                 .populate({ path: 'personId', populate: { path: 'proposalId' } })
                 .populate({ path: 'personId', populate: { path: 'enrollmentId' } });
-            // console.log(lansias[0].personId.villageId.subDistrictId.id);
+            const alertMessage = req.flash('alertMessage');
+            const alertStatus = req.flash('alertStatus');
+            const alert = { message: alertMessage, status: alertStatus };
             res.render('user/lansia/view_lansia', {
                 title: 'LANSIA',
                 user: 'user',
+                alert,
                 lansias,
                 villages,
                 modal: 'view',
@@ -55,7 +63,6 @@ module.exports = {
                 username
             });
         } catch (e) {
-            console.log(e);
             res.redirect('/user/lansia');
         }
     },
@@ -63,6 +70,7 @@ module.exports = {
         try {
             const username = req.session.user;
             const { name, nik, placeOfBirth, dateOfbirth, address, age, villageId, } = req.body;
+            // console.log(req.file);
             const person = await Person.create({
                 name: name,
                 nik: nik,
@@ -73,39 +81,58 @@ module.exports = {
             });
             const enrollment = await Enrollment.create({ userId: username.id, personId: person._id });
             const proposal = await Proposal.create({ name: 'Pengajuan Lansia', personId: person._id });
-            const lansia = await Lansia.create({ personId: person._id, age: age });
+            const lansia = await Lansia.create({ personId: person._id, age: age, imageURL: `images/${req.file.filename}` });
             person.lansiaId = lansia._id;
             person.proposalId = proposal._id;
             person.enrollmentId = enrollment._id;
             await person.save();
+            req.flash('alertMessage', 'Berhasil Menambahkan Data');
+            req.flash('alertStatus', 'success');
             res.redirect('/user/lansia');
         } catch (e) {
-            console.log(e);
+            req.flash('alertMessage', `${e.message}`);
+            req.flash('alertStatus', 'danger');
             res.redirect('/user/lansia');
         }
 
     },
     editLansia: async (req, res) => {
-        const { id } = req.body;
-        console.log(req.body);
-        const lansia = await Lansia.findOneAndUpdate({ _id: id, }, { $set: req.body }, { new: true });
-        const person = await Person.findOneAndUpdate({ _id: lansia.personId }, { $set: req.body }, { new: true });
+        try {
+            const { id } = req.body;
+            console.log(req.body);
+            const lansia = await Lansia.findOneAndUpdate({ _id: id, }, { $set: req.body }, { new: true });
+            const person = await Person.findOneAndUpdate({ _id: lansia.personId }, { $set: req.body }, { new: true });
+            await lansia.save();
+            await person.save();
+            req.flash('alertMessage', 'Berhasil Mengubah Data');
+            req.flash('alertStatus', 'success');
+            res.redirect('/user/lansia');
+        } catch (e) {
+            req.flash('alertMessage', `${e.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect('/user/lansia');
+        }
 
-        // person.villageId =
-        await lansia.save();
-        await person.save();
-        res.redirect('/user/lansia');
 
     },
     deleteLansia: async (req, res) => {
-        const { id } = req.body;
-        const lansia = await Lansia.findOne({ _id: id });
-        const person = await Person.findOne({ _id: lansia.personId });
-        await Proposal.findByIdAndDelete({ _id: person.proposalId });
-        await Enrollment.findByIdAndDelete({ _id: person.enrollmentId });
-        await lansia.remove();
-        await person.remove();
-        res.redirect('/user/lansia');
+        try {
+            const { id } = req.body;
+            const lansia = await Lansia.findOne({ _id: id });
+            const person = await Person.findOne({ _id: lansia.personId });
+            await Proposal.findByIdAndDelete({ _id: person.proposalId });
+            await Enrollment.findByIdAndDelete({ _id: person.enrollmentId });
+            await lansia.remove();
+            await person.remove();
+            req.flash('alertMessage', 'Berhasil Menghapus Data');
+            req.flash('alertStatus', 'success');
+            res.redirect('/user/lansia');
+        } catch (e) {
+            req.flash('alertMessage', `${e.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect('/user/lansia');
+        }
+
     },
     //DISABILITAS
     viewDisabilitas: async (req, res) => {
@@ -124,12 +151,15 @@ module.exports = {
                 .populate({ path: 'personId', populate: { path: 'villageId' } })
                 .populate({ path: 'personId', populate: { path: 'enrollmentId' } })
                 .populate({ path: 'personId', populate: { path: 'proposalId' } });
-
+            const alertMessage = req.flash('alertMessage');
+            const alertStatus = req.flash('alertStatus');
+            const alert = { message: alertMessage, status: alertStatus };
             res.render('user/disabilities/view_disabilities', {
                 title: 'Disabilitas',
                 user: 'user',
                 villages,
                 educations,
+                alert,
                 reasons,
                 disabilityTypes,
                 subDistricts,
@@ -158,6 +188,7 @@ module.exports = {
                 disabilityTypeId: disabilityTypeId,
                 reasonId: reasonId,
                 educationId: educationId,
+                imageURL: `images/${req.file.filename}`
             });
             const proposal = await Proposal.create({
                 name: proposalName,
@@ -174,34 +205,55 @@ module.exports = {
             disabilitas.parentId = parentName._id;
             await disabilitas.save();
             await person.save();
+            req.flash('alertMessage', 'Berhasil Menambahkan Data');
+            req.flash('alertStatus', 'success');
             res.redirect('/user/disabilitas');
         } catch (e) {
-            console.log(e);
+            req.flash('alertMessage', `${e.message}`);
+            req.flash('alertStatus', 'danger');
             res.redirect('/user/disabilitas');
         }
     },
     editDisabilitas: async (req, res) => {
-        const { id, parent, proposal } = req.body;
-        const disability = await Disability.findOneAndUpdate({ _id: id, }, { $set: req.body }, { new: true });
-        const person = await Person.findOneAndUpdate({ _id: disability.personId }, { $set: req.body }, { new: true });
-        const newParent = await Parent.findOneAndUpdate({ _id: disability.parentId }, { name: parent }, { new: true });
-        const newProposal = await Proposal.findOneAndUpdate({ _id: disability.personId.proposalId }, { name: proposal }, { new: true });
-        // const parent = await Parent.findOneAndUpdate({ _id: person.parentId }, { $set: req.body }, { new: true });
-        // const reason = await Reason.findOneAndUpdate({ _id: disability.reasonId }, { $set: req.body }, { new: true });
-        await disability.save();
-        await person.save();
-        res.redirect('/user/disabilitas');
+        try {
+            const { id, parent, proposal } = req.body;
+            const disability = await Disability.findOneAndUpdate({ _id: id, }, { $set: req.body }, { new: true });
+            const person = await Person.findOneAndUpdate({ _id: disability.personId }, { $set: req.body }, { new: true });
+            const newParent = await Parent.findOneAndUpdate({ _id: disability.parentId }, { name: parent }, { new: true });
+            const newProposal = await Proposal.findOneAndUpdate({ _id: disability.personId.proposalId }, { name: proposal }, { new: true });
+            // const parent = await Parent.findOneAndUpdate({ _id: person.parentId }, { $set: req.body }, { new: true });
+            // const reason = await Reason.findOneAndUpdate({ _id: disability.reasonId }, { $set: req.body }, { new: true });
+            await disability.save();
+            await person.save();
+            req.flash('alertMessage', 'Berhasil Mengubah Data');
+            req.flash('alertStatus', 'success');
+            res.redirect('/user/disabilitas');
+        } catch (e) {
+            req.flash('alertMessage', `${e.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect('/user/disabilitas');
+        }
     },
     deleteDisabilitas: async (req, res) => {
-        const { id } = req.body;
-        const disability = await Disability.findOne({ _id: id });
-        const parent = await Parent.findOne({ _id: disability.parentId });
-        const person = await Person.findOne({ _id: disability.personId });
-        await Proposal.findByIdAndDelete({ _id: person.proposalId });
-        await Enrollment.findByIdAndDelete({ _id: person.enrollmentId });
-        await parent.remove();
-        await person.remove();
-        await disability.remove();
-        res.redirect('/user/disabilitas');
+        try {
+            const { id } = req.body;
+            const disability = await Disability.findOne({ _id: id });
+            const parent = await Parent.findOne({ _id: disability.parentId });
+            const person = await Person.findOne({ _id: disability.personId });
+            await Proposal.findByIdAndDelete({ _id: person.proposalId });
+            await Enrollment.findByIdAndDelete({ _id: person.enrollmentId });
+            await parent.remove();
+            await person.remove();
+            await disability.remove();
+            req.flash('alertMessage', 'Berhasil Menghapus Data');
+            req.flash('alertStatus', 'success');
+            res.redirect('/user/disabilitas');
+        } catch (e) {
+            req.flash('alertMessage', `${e.message}`);
+            req.flash('alertStatus', 'danger');
+            res.redirect('/user/disabilitas');
+        }
+
+
     },
 }

@@ -19,7 +19,11 @@
               <div class="breadcrumb-item">Table</div>
             </div>
           </div>
-
+        <% if(alert.message !=""){ %>
+          <div class="alert alert-<%= alert.status%>" role="alert">
+            <%=alert.message%>
+          </div>
+          <% } %>
           <%- include('table_lansia.ejs') %>
         </section>
       </div>
@@ -73,7 +77,6 @@
   async function calculateAge(usia, tanggal) {
     let year = document.getElementById(tanggal).value;
     let split = await year.split("-");
-    alert(year);
     let currentYear = await new Date().getFullYear();
     let age = await currentYear - split[0];
     // let inputAge = await document.getElementById(usia);

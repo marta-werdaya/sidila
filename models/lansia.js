@@ -16,6 +16,10 @@ const lansiaSchema = mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    imageURL: {
+        type: String,
+
+    }
 });
 
 const Lansia = mongoose.model("Lansia", lansiaSchema);

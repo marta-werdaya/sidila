@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body container">
-                <form action="/user/disabilitas" method="POST">
+                <form action="/user/disabilitas" method="POST" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="nik">NIK</label>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label for="village">Desa</label>
                             <select id="village" class="form-control" name="villageId" onfocusout="validateVillage()">
                                 <option>...Pilih Desa...</option>
@@ -56,8 +56,6 @@
                             </select>
                             <span class="invalid-feedback"></span>
                         </div>
-                    </div>
-                    <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="education">Pendidikan Tekrakhir</label>
                             <select id="education" class="form-control" name="educationId"
@@ -69,14 +67,14 @@
                             </select>
                             <span class="invalid-feedback"></span>
                         </div>
+                    </div>
+                    <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="parent">Nama Orang Tua</label>
                             <input type="text" class="form-control" id="parent" placeholder="masukkan nama oang tua"
                                 name="parent" onfocusout="validateParent()">
                             <span class="invalid-feedback"></span>
                         </div>
-                    </div>
-                    <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="disabilityType">Jenis Disabilitas</label>
                             <select id="disabilityType" class="form-control" name="disabilityTypeId"
@@ -88,6 +86,8 @@
                                 <span class="invalid-feedback"></span>
                             </select>
                         </div>
+                    </div>
+                    <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="reason"> Penyebab Disabilitas</label>
                             <select id="reason" class="form-control" name="reasonId" onfocusout="validateReason()">
@@ -98,21 +98,19 @@
                                 <span class="invalid-feedback"></span>
                             </select>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="proposal">Bantuan yang Diusulkan</label>
-                            <textarea class="form-control" id="proposal" onfocusout="validateProposal()" cols="30"
-                                rows="10" name="proposalName"></textarea>
-                            <span class="invalid-feedback"></span>
+                        <div class="form-group col-md-6 mt-4">
+                            <input type="file" class="custom-file-input" id="picture" name="image" required>
+                            <label class="custom-file-label" for="validatedCustomFile">Pilih gambar</label>
                         </div>
                     </div>
-                    <!-- <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <input type="file" class="custom-file-input" id="picture" required>
-                        <label class="custom-file-label" for="validatedCustomFile">Pilih gambar</label>
+                    <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="proposal">Bantuan yang Diusulkan</label>
+                        <textarea class="form-control" id="proposal" onfocusout="validateProposal()" cols="30"
+                            rows="10" name="proposalName"></textarea>
+                        <span class="invalid-feedback"></span>
                     </div>
-                </div> -->
+                </div>
             </div>
             <div class="modal-footer bg-whitesmoke ">
                 <button type="submit" class="btn btn-success">Yes</button>

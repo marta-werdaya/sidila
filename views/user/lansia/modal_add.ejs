@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/user/lansia" method="POST" id="myForm">
+            <form action="/user/lansia" method="POST" id="myForm" enctype="multipart/form-data">
                 <div class="modal-body container">
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -61,22 +61,11 @@
                             </select>
                             <span class="invalid-feedback"></span>
                         </div>
-                        <!-- <div class="form-group col-md-6">
-                            <label for="subdistrict">Kecamatan</label>
-                            <select id="subdistrict" class="form-control" name="subdistrict">
-                                <option>...Pilih Kecamatan...</option>
-                                <% for(let i= 0; i < subDistricts.length; i++){ %>
-                                <option value="<%= subDistricts[i].id %>"><%= subDistricts[i].name %></option>
-                                <% } %>
-                            </select>
-                        </div> -->
-                    </div>
-                    <!-- <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <input type="file" class="custom-file-input" id="picture">
+                        <div class="form-group col-md-6 mt-4">
+                            <input type="file" class="custom-file-input" id="picture" name="image">
                             <label class="custom-file-label" for="validatedCustomFile">Pilih gambar</label>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke ">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>

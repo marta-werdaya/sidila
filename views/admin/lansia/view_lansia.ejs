@@ -19,6 +19,12 @@
               <div class="breadcrumb-item">Table</div>
             </div>
           </div>
+           <!-- Alert Messagge -->
+           <% if(alert.message !=""){ %>
+            <div class="alert alert-<%= alert.status%>" role="alert">
+              <%=alert.message%>
+            </div>
+            <% } %>
 
           <%- include('table_lansia.ejs')%>
         </section>

@@ -28,6 +28,7 @@
               <th>tanggal pengajuan</th>
               <th>tanggal penerimaan</th>
               <th>Jenis Pengajuan</th>
+              <th>Pemberi Bantuan</th>
               <th>penerima</th>
             </tr>
             <% for(i = 0; i < penerimas.length; i++) {%>
@@ -40,6 +41,7 @@
               <td><%= datepengajuan %></td>
               <td><%= datediterima %></td>
               <td><%= penerimas[i].proposalId.name%></td>
+              <td><%= penerimas[i].jenisBantuan.pemberi%></td>
               <td><%= penerimas[i].penerima%></td>
               <td>
                 <!-- <div class="dropdown">

@@ -1,0 +1,29 @@
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+    destination: "public/images",
+    filename: function (req, file, cb) {
+        cb(null, `${Date.now()}_${file.originalname}`);
+    }
+});
+
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 3000000 },
+    fileFilter: function (req, file, cb) {
+        checkFileType(file, cb);
+    }
+}).single("image");
+
+function checkFileType(file, cb) {
+    const fileTypes = /jpeg|jpg|png|gif/;
+    const extName = fileTypes.test(path.extname(file.originalname).toLowerCase());
+    const mimeType = fileTypes.test(file.mimetype);
+    if (mimeType && extName) {
+        return cb(null, true);
+    } else {
+        cb("Error: hanya bisa memasukkan Gambar ");
+    }
+}
+module.exports = { upload };

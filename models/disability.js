@@ -27,6 +27,10 @@ const disabilitySchema = mongoose.Schema({
         type: ObjectId,
         ref: 'Parent'
     },
+    imageURL: {
+        type: String,
+
+    }
 
 });
 
